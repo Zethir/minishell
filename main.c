@@ -6,16 +6,15 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 14:38:13 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/24 18:54:12 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/25 18:20:48 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	push_node(t_lst *node, t_lst **head)
+void		push_node(t_lst *node, t_lst **head)
 {
 	t_lst	*tmp;
-
 
 	if (*head == NULL)
 	{
@@ -29,8 +28,8 @@ void	push_node(t_lst *node, t_lst **head)
 	tmp->next = node;
 }
 
-t_lst	*init_lst(char **env)
-{	
+t_lst		*init_lst(char **env)
+{
 	t_lst	*node;
 	t_lst	*head;
 
@@ -48,21 +47,33 @@ t_lst	*init_lst(char **env)
 	return (head);
 }
 
-static void		main_minishell(t_lst *node)
+static void	main_minishell(t_lst *node)
 {
-	get_prompt(node);
+	char *line;
+
+	line = NULL;
+	while (1)
+	{
+		get_prompt(node);
+		if (get_next_line(0, &line) != 1)
+			break ;
+		if (ft_strcmp("exit", line) == 0)
+			break ;
+		if (ft_strncmp(line, "env", 3) == 0)
+			deal_with_env(node, line);
+	}
+	printf("exit\n");
 }
 
-int		main(int ac, char **av, char **env)
+int			main(int ac, char **av, char **env)
 {
 	t_lst	*node;
-	
+
 	av = NULL;
 	node = init_lst(env);
-	signal(SIGINT, SIG_IGN);
 	if (ac == 1)
 		main_minishell(node);
 	else
-		return (1);	
+		return (1);
 	return (0);
 }
