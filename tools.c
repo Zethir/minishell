@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 15:17:58 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/25 15:57:40 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/27 16:53:05 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,14 @@ int		ft_strccmp(const char *s1, const char *s2, char c)
 		tmp2++;
 	}
 	return (*tmp1 - *tmp2);
+}
+
+int		ft_strlen_char(char *str, char c)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] && str[i] != c)
+		i++;
+	return (i);
 }

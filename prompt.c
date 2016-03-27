@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 17:48:35 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/25 19:01:51 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/27 21:37:34 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ static void	prompt_name(t_lst *node)
 		color(RESET, "");
 		ft_putstr(" in ");
 	}
-	else
-		ft_putstr("no USER var ");
 }
 
 static char	*get_pwd(t_lst *node)
@@ -55,7 +53,10 @@ static char	*get_pwd(t_lst *node)
 		{
 			old_line = ft_strdup(node->line);
 			node->line = ft_strrchr(node->line, '/');
-			path = ft_strdup(node->line);
+			if (node->line)
+				path = ft_strdup(node->line);
+			else
+				path = "\0";
 			node->line = ft_strdup(old_line);
 		}
 		node = node->next;
@@ -75,11 +76,10 @@ static void	prompt_path(t_lst *node)
 	{
 		color(PURPLE, "");
 		ft_putchar('~');
-		ft_putstr(path);
+		color(RESET, "");
+		color(PURPLE, path);
 		color(RESET, "");
 	}
-	else
-		ft_putstr("no PATH var ");
 	color(RED, " \n$> ");
 	color(RESET, "");
 }

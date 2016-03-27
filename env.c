@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 14:55:13 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/25 19:04:24 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/27 18:56:41 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,13 @@ void		print_env(t_lst *node)
 	tmp = node;
 	while (node)
 	{
-		ft_putendl(node->line);
-		node = node->next;
+		if (!node->line)
+			node = node->next;
+		else
+		{	
+			ft_putendl(node->line);
+			node = node->next;
+		}
 	}
 	node = tmp;
 }
@@ -86,7 +91,7 @@ void		restore_env(t_lst *node, char **save)
 	{
 		while (node)
 		{
-			if (ft_strccmp(node->line, *save, '=') == 0)
+			if (ft_strncmp(node->name, *save, ft_strlen(node->name)) == 0)
 				node->line = ft_strdup(*save);
 			node = node->next;
 		}
@@ -101,15 +106,18 @@ void		deal_with_env(t_lst *node, char *line)
 	if (line[3] == ' ' && line[4])
 	{
 		if (line[4] == '-')
+		{	
 			save = deal_with_opt(node, line);
+			if (!save || !(*save))
+				return ;
+		}
 		else
 		{	
 			save = deal_with_arg(node, line);
-			if (!save)
+			if (!save || !(*save))
 				return ;
 		}
 		restore_env(node, save);
-		free(&save);
 	}
 	else
 		print_env(node);

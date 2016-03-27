@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 14:38:13 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/25 18:20:48 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/27 20:22:06 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_lst		*init_lst(char **env)
 			return (NULL);
 		node->next = NULL;
 		node->line = ft_strdup(*env);
+		node->name = ft_strsub(*env, 0, ft_strlen_char(*env, '='));
 		push_node(node, &head);
 		env++;
 	}
@@ -61,6 +62,8 @@ static void	main_minishell(t_lst *node)
 			break ;
 		if (ft_strncmp(line, "env", 3) == 0)
 			deal_with_env(node, line);
+		if (ft_strncmp(line, "setenv", 6) == 0)
+			do_setenv(node, line);
 	}
 	printf("exit\n");
 }
