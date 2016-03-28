@@ -6,13 +6,13 @@
 #    By: cboussau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/24 14:55:22 by cboussau          #+#    #+#              #
-#    Updated: 2016/03/27 20:17:33 by cboussau         ###   ########.fr        #
+#    Updated: 2016/03/28 17:12:11 by cboussau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-SRC = main.c prompt.c env.c tools.c env_arg.c errors.c builtin_env.c
+SRC = main.c prompt.c env.c tools.c env_arg.c errors.c setenv.c exit.c
 
 OBJ = $(SRC:.c=.o)
 LIB = ./libft/libft.a

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 14:41:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/27 20:45:35 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/28 18:16:30 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,16 @@ typedef struct		s_lst
 void				push_node(t_lst *node, t_lst **head);
 t_lst				*init_lst(char **env);
 void				get_prompt(t_lst *node);
-void				deal_with_env(t_lst *node, char *line);
+int					deal_with_env(t_lst *node, char *line);
 int					ft_strccmp(const char *s1, const char *s2, char c);
 void				print_env(t_lst *node);
 int					ft_strlen_char(char *str, char c);
-char				**deal_with_opt(t_lst *node, char *line);
+char				**deal_with_opt(t_lst *node, char **arg);
 void				print_error_opt(char *arg);
 void				print_main_error(char *arg);
 void				print_error_arg(void);
-void				do_setenv(t_lst *node, char *line);
+int					do_setenv(t_lst *node, char *line);
 int					print_alpha_error(char **arg);
+int					do_exit(char *line);
 
 #endif

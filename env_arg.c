@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 18:45:03 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/27 19:13:46 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/28 18:15:59 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,12 @@ static int	check_u_opt(t_lst *node, char **arg, char **save)
 		return (1);
 }
 
-char		**deal_with_opt(t_lst *node, char *line)
+char		**deal_with_opt(t_lst *node, char **arg)
 {
-	char	**arg;
 	char	**save;
 	int		i;
 
 	i = 0;
-	arg = ft_strsplit(&line[4], ' ');
 	save = (char **)malloc(sizeof(char *) * 10);
 	if (check_u_opt(node, arg, save) == 1)
 	{
