@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 14:38:13 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/28 17:34:23 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/28 21:20:06 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ t_lst		*init_lst(char **env)
 		node->next = NULL;
 		node->line = ft_strdup(*env);
 		node->name = ft_strsub(*env, 0, ft_strlen_char(*env, '='));
+		if (ft_strccmp(*env, "USER=", '=') == 0)
+			node->user = ft_strsub(*env, 5, ft_strlen(*env) - 5);
+		if (ft_strccmp(*env, "PWD=", '=') == 0)
+			node->path = ft_strrchr(*env, '/');
 		push_node(node, &head);
 		env++;
 	}
@@ -55,12 +59,14 @@ static int	do_arg(t_lst *node, char *line, char **arg)
 	i = 0;
 	if (ft_strncmp(*arg, "exit", 4) == 0)
 		i = do_exit(line);
-	if (ft_strncmp(*arg, "env", 3) == 0)
+	else if (ft_strncmp(*arg, "env", 3) == 0)
 		i = deal_with_env(node, line);
-	if (ft_strncmp(*arg, "setenv", 6) == 0)
+	else if (ft_strncmp(*arg, "setenv", 6) == 0)
 		i = do_setenv(node, line);
-	//if (ft_strncmp(*arg, "unsetenv", 8) == 0)
-	//	do_unsetenv(node, line);
+	else if (ft_strncmp(*arg, "unsetenv", 8) == 0)
+		i = do_unsetenv(node, line);
+	else
+		i = no_command_error(*arg);
 	return (i);
 }
 
@@ -92,6 +98,7 @@ int			main(int ac, char **av, char **env)
 
 	av = NULL;
 	node = init_lst(env);
+	i = 0;
 	if (ac == 1)
 		i = main_minishell(node);
 	else

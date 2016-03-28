@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/27 17:27:17 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/27 20:53:12 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/28 21:21:13 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,20 @@ int		print_alpha_error(char **arg)
 		i++;
 	}
 	return (0);
+}
+
+void	print_env_error(char *arg)
+{
+	ft_putstr("env: ");
+	ft_putstr(arg);
+	ft_putendl(": No such file or directory");
+}
+
+int		no_command_error(char *arg)
+{
+	ft_putstr(arg);
+	ft_putendl(": Command not found.");
+	return (-1);
 }
 
 void	print_main_error(char *arg)

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 14:55:13 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/28 18:43:36 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/28 20:23:37 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void		print_env(t_lst *node)
 
 static char	*cmp_line(t_lst *node, char **arg, char *save)
 {
-	int		i;
+	t_lst	*tmp;
 	char	*str;
 
-	i = 0;
+	tmp = node;
 	while (node)
 	{
 		if (ft_strccmp(node->line, *arg, '=') == 0)
@@ -46,13 +46,12 @@ static char	*cmp_line(t_lst *node, char **arg, char *save)
 		}
 		node = node->next;
 	}
+	node = tmp;
 	if (!str)
 		str = "!@#$é";
 	if (ft_strcmp(str, *arg) != 0)
 	{
-		ft_putstr("env: ");
-		ft_putstr(*arg);
-		ft_putendl(": No such file or directory");
+		print_env_error(*arg);
 		return (NULL);
 	}
 	return (save);
@@ -60,12 +59,13 @@ static char	*cmp_line(t_lst *node, char **arg, char *save)
 
 static char	**deal_with_arg(t_lst *node, char **arg)
 {
-	t_lst	*tmp;
 	char	**save;
 	int		i;
 
-	tmp = node;
-	save = (char **)malloc(sizeof(char *) * 10);
+	i = 0;
+	while (arg[i])
+		i++;
+	save = (char **)malloc(sizeof(char *) * i);
 	i = 0;
 	if (!save)
 		return (NULL);
@@ -74,7 +74,6 @@ static char	**deal_with_arg(t_lst *node, char **arg)
 		save[i] = cmp_line(node, arg, save[i]);
 		if (!save[i])
 			return (NULL);
-		node = tmp;
 		i++;
 		arg++;
 	}
@@ -110,17 +109,11 @@ int			deal_with_env(t_lst *node, char *line)
 	if (*arg)
 	{
 		if (*arg[0] == '-')
-		{	
 			save = deal_with_opt(node, arg);
-			if (!save || !(*save))
-				return (-1);
-		}
 		else
-		{	
 			save = deal_with_arg(node, arg);
-			if (!save || !(*save))
-				return (-1);
-		}
+		if (!save || !(*save))
+			return (-1);
 		restore_env(node, save);
 	}
 	else

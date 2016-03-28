@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 18:45:03 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/28 18:15:59 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/28 20:35:13 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char		**deal_with_opt(t_lst *node, char **arg)
 	int		i;
 
 	i = 0;
-	save = (char **)malloc(sizeof(char *) * 10);
+	save = (char **)malloc(sizeof(char *) * 1);
 	if (check_u_opt(node, arg, save) == 1)
 	{
 		if (!arg[i + 1] && arg[i][1] == 'u')

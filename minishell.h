@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 14:41:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/28 18:16:30 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/28 21:22:03 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,27 @@ typedef struct		s_lst
 {
 	char			*line;
 	char			*name;
+	char			*user;
+	char			*path;
 	struct s_lst	*next;
 }					t_lst;
 
-void				push_node(t_lst *node, t_lst **head);
 t_lst				*init_lst(char **env);
-void				get_prompt(t_lst *node);
 int					deal_with_env(t_lst *node, char *line);
 int					ft_strccmp(const char *s1, const char *s2, char c);
-void				print_env(t_lst *node);
+int					do_setenv(t_lst *node, char *line);
+int					do_unsetenv(t_lst *node, char *line);
+int					print_alpha_error(char **arg);
+int					do_exit(char *line);
 int					ft_strlen_char(char *str, char c);
-char				**deal_with_opt(t_lst *node, char **arg);
+int					no_command_error(char *arg);
+void				push_node(t_lst *node, t_lst **head);
+void				get_prompt(t_lst *node);
+void				print_env(t_lst *node);
 void				print_error_opt(char *arg);
 void				print_main_error(char *arg);
 void				print_error_arg(void);
-int					do_setenv(t_lst *node, char *line);
-int					print_alpha_error(char **arg);
-int					do_exit(char *line);
+void				print_env_error(char *arg);
+char				**deal_with_opt(t_lst *node, char **arg);
 
 #endif
