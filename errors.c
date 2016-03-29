@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/27 17:27:17 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/28 21:21:13 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/29 16:45:31 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 void	print_error_opt(char *arg)
 {
-	ft_putstr("env: unsetenv ");
-	ft_putstr(arg);
-	ft_putstr(": Invalid argument\n");
+	ft_putstr_fd("env: unsetenv ", 2);
+	ft_putstr_fd(arg, 2);
+	ft_putstr_fd(": Invalid argument\n", 2);
 }
 
 void	print_error_arg(void)
 {
-	ft_putendl("env: missing argument after option");
-	ft_putstr("usage: env [-iv] [-P utilpath] [-S string] [-u name]\n");
-	ft_putstr("           [name=value ...] [utility [argument ...]]\n");
+	ft_putendl_fd("env: missing argument after option", 2);
+	ft_putstr_fd("usage: env [-iv] [-P utilpath] [-S string] [-u name]\n", 2);
+	ft_putstr_fd("           [name=value ...] [utility [argument ...]]\n", 2);
 }	
 
 int		print_alpha_error(char **arg)
@@ -37,7 +37,7 @@ int		print_alpha_error(char **arg)
 	{
 		if (arg[0][i] == '=')
 		{
-			ft_putendl(error);
+			ft_putendl_fd(error, 2);
 			return (1);
 		}
 		i++;
@@ -47,23 +47,23 @@ int		print_alpha_error(char **arg)
 
 void	print_env_error(char *arg)
 {
-	ft_putstr("env: ");
-	ft_putstr(arg);
-	ft_putendl(": No such file or directory");
+	ft_putstr_fd("env: ", 2);
+	ft_putstr_fd(arg, 2);
+	ft_putendl_fd(": No such file or directory", 2);
 }
 
 int		no_command_error(char *arg)
 {
-	ft_putstr(arg);
-	ft_putendl(": Command not found.");
+	ft_putstr_fd(arg, 2);
+	ft_putendl_fd(": Command not found.", 2);
 	return (-1);
 }
 
 void	print_main_error(char *arg)
 {
-	ft_putstr("env: illegal option -- ");
-	ft_putendl(arg);
-	ft_putstr("usage: env [-iv] [-P utilpath] [-S string] [-u name]\n");
-	ft_putstr("           [name=value ...] [utility [argument ...]]\n");
+	ft_putstr_fd("env: illegal option -- ", 2);
+	ft_putendl_fd(arg, 2);
+	ft_putstr_fd("usage: env [-iv] [-P utilpath] [-S string] [-u name]\n", 2);
+	ft_putstr_fd("           [name=value ...] [utility [argument ...]]\n", 2);
 }
 

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/27 19:39:25 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/28 17:27:35 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/29 16:54:53 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	handle_arg_setenv(t_lst *node, char **arg)
 		}
 	}
 	else
-		ft_putendl("setenv: Variable name must begin with a letter.");
+		ft_putendl_fd("setenv: Variable name must begin with a letter.", 2);
 }	
 
 int			do_setenv(t_lst *node, char *line)
@@ -65,7 +65,7 @@ int			do_setenv(t_lst *node, char *line)
 	while (arg[i])
 		i++;
 	if (i > 2)
-		ft_putendl("setenv : Too many arguments");
+		ft_putendl_fd("setenv: Too many arguments", 2);
 	else if (!*arg)	
 		print_env(node);
 	else if (print_alpha_error(arg) == 1)

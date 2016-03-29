@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/28 16:11:24 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/28 17:25:40 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/29 16:53:35 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	deal_with_int(char **arg)
 	{
 		if ((*arg)[i] < '0' || (*arg)[i] > '9')
 		{	
-			ft_putendl("exit: Badly formed number.");
+			ft_putendl_fd("exit: Badly formed number.", 2);
 			return (-1);
 		}
 		i++;
@@ -42,7 +42,7 @@ int			do_exit(char *line)
 		i++;
 	if (i > 1)
 	{
-		ft_putendl("exit: Expression Syntax.");
+		ft_putendl_fd("exit: Expression Syntax.", 2);
 		return (-1);
 	}
 	if (*arg[0] >= '0' && *arg[0] <= '9')
