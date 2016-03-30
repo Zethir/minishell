@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/27 17:27:17 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/29 16:45:31 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/30 18:35:12 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,6 @@ void	print_env_error(char *arg)
 	ft_putendl_fd(": No such file or directory", 2);
 }
 
-int		no_command_error(char *arg)
-{
-	ft_putstr_fd(arg, 2);
-	ft_putendl_fd(": Command not found.", 2);
-	return (-1);
-}
-
 void	print_main_error(char *arg)
 {
 	ft_putstr_fd("env: illegal option -- ", 2);
@@ -66,4 +59,3 @@ void	print_main_error(char *arg)
 	ft_putstr_fd("usage: env [-iv] [-P utilpath] [-S string] [-u name]\n", 2);
 	ft_putstr_fd("           [name=value ...] [utility [argument ...]]\n", 2);
 }
-

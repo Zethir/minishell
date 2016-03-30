@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 14:38:13 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/29 17:36:40 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/30 19:15:09 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,8 @@ t_lst		*init_lst(char **env)
 		node->name = ft_strsub(*env, 0, ft_strlen_char(*env, '='));
 		if (ft_strccmp(*env, "USER=", '=') == 0)
 			node->user = ft_strsub(*env, 5, ft_strlen(*env) - 5);
-		if (ft_strccmp(*env, "PATH=", '=') == 0)
-			node->path = *env;
 		if (ft_strncmp(*env, "HOME=", 5) == 0)
-			node->home = *env;
+			node->home = ft_strchr(*env, '/');
 		push_node(node, &head);
 		env++;
 	}
@@ -69,8 +67,8 @@ static int	do_arg(t_lst *node, char *line, char **arg)
 		i = do_unsetenv(node, line);
 	else if (ft_strncmp(*arg, "cd", 2) == 0)
 		i = do_cd(node, line);
-	else
-		i = no_command_error(*arg);
+	else if (*arg)
+		i = deal_with_command(node, arg);
 	return (i);
 }
 
@@ -88,8 +86,9 @@ static int	main_minishell(t_lst *node)
 		if (get_next_line(0, &line) != 1)
 			break ;
 		arg = ft_strsplit(line, ' ');
-		if (do_arg(node, line, arg) >= 0)
-			break;
+		if (*arg)
+			if (do_arg(node, line, arg) >= 0)
+				break;
 	}
 	ft_putstr("exit\n");
 	return (i);

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 14:41:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/29 16:14:00 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/30 21:14:08 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ typedef struct		s_lst
 	char			*line;
 	char			*name;
 	char			*user;
-	char			*path;
 	char			*home;
 	struct s_lst	*next;
 }					t_lst;
@@ -50,7 +49,7 @@ int					print_alpha_error(char **arg);
 int					do_exit(char *line);
 int					do_cd(t_lst *node, char *line);
 int					ft_strlen_char(char *str, char c);
-int					no_command_error(char *arg);
+int					deal_with_command(t_lst *node, char **arg);
 void				push_node(t_lst *node, t_lst **head);
 void				get_prompt(t_lst *node);
 void				print_env(t_lst *node);
@@ -58,6 +57,11 @@ void				print_error_opt(char *arg);
 void				print_main_error(char *arg);
 void				print_error_arg(void);
 void				print_env_error(char *arg);
+void				no_command_error(char *arg);
+void				deal_with_prompt_path(int i, char *buff);
+void				color(char *color, char *str);
+void				print_right_error(t_lst *node, char *arg);
+void				check_command(t_lst *node, char **arg, char *right_path, char **env);
 char				**deal_with_opt(t_lst *node, char **arg);
 
 #endif

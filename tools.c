@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 15:17:58 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/27 16:53:05 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/30 22:03:09 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,45 @@ int		ft_strccmp(const char *s1, const char *s2, char c)
 
 int		ft_strlen_char(char *str, char c)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	while (str[i] && str[i] != c)
 		i++;
 	return (i);
 }
+
+void	deal_with_prompt_path(int i, char *buff)
+{
+	char	*str;
+
+	if (i > 1)
+	{
+		color(PURPLE, "");
+		ft_putchar('~');
+		color(RESET, "");
+		str = ft_strdup(&buff[i]);
+		color(PURPLE, str);
+		color(RESET, "");
+	}
+	else if (i == 0)
+	{
+		str = ft_strchr(buff, '/');
+		color(PURPLE, str);
+		color(RESET, "");
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
