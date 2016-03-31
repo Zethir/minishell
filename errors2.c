@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/30 18:35:18 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/30 21:44:33 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/31 18:10:19 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ int		arg_in_dir(t_lst *node, char *arg)
 	node = tmp;
 	if ((dir = opendir(str)))
 		while ((ret = readdir(dir)))
-			if (ft_strcmp(arg, ret->d_name) == 0)
-				return (1);
-	return (0);
+			if (!(ft_strcmp(arg, ret->d_name)))
+				return (0);
+	return (1);
 }
 
 void	print_right_error(t_lst *node, char *arg)

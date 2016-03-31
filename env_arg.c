@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 18:45:03 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/29 16:52:50 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/31 18:05:31 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,20 @@ static int	check_u_opt(t_lst *node, char **arg, char **save)
 	i = 0;
 	if (arg[i][0] == '-' && arg[i][1] == 'u' && !arg[i][2] && arg[i + 1])
 	{
-		i++;
-		save = check_arg(node, arg[i], save);
+		while (arg[i])
+			i++;
+		if (i > 3)
+		{
+			ft_putendl_fd("env: Too many arguments.", 2);
+			return (0);
+		}
+		arg++;
+		save = check_arg(node, *arg, save);
 		if (!save || !(*save))
-			print_error_opt(arg[i]);
-		else if (arg[i + 1])
-			print_error_opt(arg[i + 1]);
+			print_error_opt(*arg);
+		arg++;
+		if (*arg)
+			deal_with_command(node, arg);
 		else
 			print_env(node);
 		return (0);
@@ -56,6 +64,8 @@ char		**deal_with_opt(t_lst *node, char **arg)
 	char	**save;
 
 	save = (char **)malloc(sizeof(char *) * 1);
+	if (!save)
+		return (NULL);
 	if (check_u_opt(node, arg, save) == 1)
 	{
 		if (!arg[1] && arg[0][1] == 'u')

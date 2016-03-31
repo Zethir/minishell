@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 14:38:13 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/30 19:15:09 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/31 18:45:26 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,23 +52,25 @@ t_lst		*init_lst(char **env)
 	return (head);
 }
 
-static int	do_arg(t_lst *node, char *line, char **arg)
+static int	do_arg(t_lst *node, char *arg)
 {
-	int i;
+	int 	i;
+	char	**cmd;
 
 	i = 0;
-	if (ft_strncmp(*arg, "exit", 4) == 0)
-		i = do_exit(line);
-	else if (ft_strncmp(*arg, "env", 3) == 0)
-		i = deal_with_env(node, line);
-	else if (ft_strncmp(*arg, "setenv", 6) == 0)
-		i = do_setenv(node, line);
-	else if (ft_strncmp(*arg, "unsetenv", 8) == 0)
-		i = do_unsetenv(node, line);
-	else if (ft_strncmp(*arg, "cd", 2) == 0)
-		i = do_cd(node, line);
-	else if (*arg)
-		i = deal_with_command(node, arg);
+	cmd = ft_strsplit(arg, ' ');
+	if (ft_strncmp(*cmd, "exit", 4) == 0)
+		i = do_exit(arg);
+	else if (ft_strncmp(*cmd, "env", 3) == 0)
+		i = deal_with_env(node, arg);
+	else if (ft_strncmp(*cmd, "setenv", 6) == 0)
+		i = do_setenv(node, arg);
+	else if (ft_strncmp(*cmd, "unsetenv", 8) == 0)
+		i = do_unsetenv(node, arg);
+	else if (ft_strncmp(*cmd, "cd", 2) == 0)
+		i = do_cd(node, arg);
+	else if (*cmd)
+		i = deal_with_command(node, cmd);
 	return (i);
 }
 
@@ -85,12 +87,17 @@ static int	main_minishell(t_lst *node)
 		get_prompt(node);
 		if (get_next_line(0, &line) != 1)
 			break ;
-		arg = ft_strsplit(line, ' ');
-		if (*arg)
-			if (do_arg(node, line, arg) >= 0)
-				break;
+		arg = ft_strsplit(line, ';');
+		while (*arg)
+		{	
+			if (do_arg(node, *arg) >= 0)
+			{	
+				ft_putstr("exit\n");
+				exit (0);
+			}	
+			arg++;
+		}
 	}
-	ft_putstr("exit\n");
 	return (i);
 }
 
@@ -101,6 +108,7 @@ int			main(int ac, char **av, char **env)
 
 	av = NULL;
 	node = init_lst(env);
+	signal(SIGINT, SIG_IGN);
 	i = 0;
 	if (ac == 1)
 		i = main_minishell(node);

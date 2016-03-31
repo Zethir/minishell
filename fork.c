@@ -6,12 +6,12 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/30 16:28:16 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/30 21:57:19 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/31 18:23:42 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <sys/errno.h>
+
 static char	**split_path(t_lst *node)
 {
 	t_lst 			*tmp;
@@ -120,7 +120,7 @@ int			deal_with_command(t_lst *node, char **arg)
 
 	path = split_path(node);
 	env = get_env(node);
-	if (*path && *arg && *env)
+	if (path && *arg && env)
 	{
 		right_path = check_path(path, *arg);
 		if (right_path)

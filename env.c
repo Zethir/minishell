@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 14:55:13 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/28 20:23:37 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/31 18:44:17 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static char	*cmp_line(t_lst *node, char **arg, char *save)
 		str = "!@#$é";
 	if (ft_strcmp(str, *arg) != 0)
 	{
-		print_env_error(*arg);
+		print_error_opt(*arg);
 		return (NULL);
 	}
 	return (save);
@@ -65,10 +65,10 @@ static char	**deal_with_arg(t_lst *node, char **arg)
 	i = 0;
 	while (arg[i])
 		i++;
-	save = (char **)malloc(sizeof(char *) * i);
-	i = 0;
+	save = (char **)malloc(sizeof(char *) * i + 1);
 	if (!save)
 		return (NULL);
+	i = 0;
 	while (*arg)
 	{
 		save[i] = cmp_line(node, arg, save[i]);

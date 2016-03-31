@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 15:17:58 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/30 22:03:09 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/31 17:36:25 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,15 @@ int		ft_strlen_char(char *str, char c)
 void	deal_with_prompt_path(int i, char *buff)
 {
 	char	*str;
-
-	if (i > 1)
+	
+	if (i >= 1)
 	{
 		color(PURPLE, "");
 		ft_putchar('~');
 		color(RESET, "");
+	}
+	if (i > 1)
+	{
 		str = ft_strdup(&buff[i]);
 		color(PURPLE, str);
 		color(RESET, "");
