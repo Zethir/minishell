@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/28 17:12:34 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/29 16:55:17 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/31 19:25:29 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,3 @@ int			do_unsetenv(t_lst *node, char *line)
 		check_valid_arg(node, arg);
 	return (-1);
 }
-	

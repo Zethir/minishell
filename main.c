@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 14:38:13 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/31 18:45:26 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/31 19:21:47 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_lst		*init_lst(char **env)
 
 static int	do_arg(t_lst *node, char *arg)
 {
-	int 	i;
+	int		i;
 	char	**cmd;
 
 	i = 0;
@@ -89,12 +89,12 @@ static int	main_minishell(t_lst *node)
 			break ;
 		arg = ft_strsplit(line, ';');
 		while (*arg)
-		{	
+		{
 			if (do_arg(node, *arg) >= 0)
-			{	
+			{
 				ft_putstr("exit\n");
-				exit (0);
-			}	
+				exit(0);
+			}
 			arg++;
 		}
 	}

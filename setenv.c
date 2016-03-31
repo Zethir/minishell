@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/27 19:39:25 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/29 16:54:53 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/31 19:20:28 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	cmp_list_arg(t_lst *node, char **arg)
 {
-	t_lst 	*tmp;
+	t_lst	*tmp;
 
 	tmp = node;
 	while (node)
@@ -52,7 +52,7 @@ static void	handle_arg_setenv(t_lst *node, char **arg)
 	}
 	else
 		ft_putendl_fd("setenv: Variable name must begin with a letter.", 2);
-}	
+}
 
 int			do_setenv(t_lst *node, char *line)
 {
@@ -66,7 +66,7 @@ int			do_setenv(t_lst *node, char *line)
 		i++;
 	if (i > 2)
 		ft_putendl_fd("setenv: Too many arguments", 2);
-	else if (!*arg)	
+	else if (!*arg)
 		print_env(node);
 	else if (print_alpha_error(arg) == 1)
 		return (-1);

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/27 17:27:17 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/30 18:35:12 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/31 19:15:15 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ void	print_error_arg(void)
 	ft_putendl_fd("env: missing argument after option", 2);
 	ft_putstr_fd("usage: env [-iv] [-P utilpath] [-S string] [-u name]\n", 2);
 	ft_putstr_fd("           [name=value ...] [utility [argument ...]]\n", 2);
-}	
+}
 
 int		print_alpha_error(char **arg)
 {
-	int 	i;
+	int		i;
 	char	*error;
-	
+
 	i = 0;
 	error = "setenv: Variable name must contain alphanumeric characters.";
 	while (arg[0][i])

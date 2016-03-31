@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 15:17:58 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/31 17:36:25 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/31 19:29:24 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		ft_strlen_char(char *str, char c)
 void	deal_with_prompt_path(int i, char *buff)
 {
 	char	*str;
-	
+
 	if (i >= 1)
 	{
 		color(PURPLE, "");
@@ -61,16 +61,18 @@ void	deal_with_prompt_path(int i, char *buff)
 	}
 }
 
+int		get_index(t_lst *node)
+{
+	t_lst	*tmp;
+	int		i;
 
-
-
-
-
-
-
-
-
-
-
-
-
+	i = 0;
+	tmp = node;
+	while (node)
+	{
+		i++;
+		node = node->next;
+	}
+	node = tmp;
+	return (i);
+}

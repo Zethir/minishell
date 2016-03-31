@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 17:48:35 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/31 17:37:02 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/31 19:19:05 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	prompt_name(t_lst *node)
 
 static int	cmp_pwd_home(t_lst *node, char *buff)
 {
-	t_lst 	*tmp;
+	t_lst	*tmp;
 	int		i;
 
 	tmp = node;

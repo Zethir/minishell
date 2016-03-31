@@ -6,21 +6,21 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/29 13:41:53 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/31 17:39:32 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/31 19:14:13 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	go_to_root(t_lst *node)
+static void		go_to_root(t_lst *node)
 {
-	t_lst 		*tmp;
+	t_lst		*tmp;
 
 	tmp = node;
 	while (node)
 	{
 		if (ft_strcmp(node->name, "HOME") == 0)
-		{	
+		{
 			node->home = ft_strchr(node->home, '/');
 			chdir(node->home);
 			return ;
@@ -30,9 +30,9 @@ static void	go_to_root(t_lst *node)
 	node = tmp;
 }
 
-static char	*deal_with_root(t_lst *node, char *arg)
+static char		*deal_with_root(t_lst *node, char *arg)
 {
-	char 		*tmp;
+	char		*tmp;
 
 	if (!arg[1])
 		go_to_root(node);
@@ -46,19 +46,19 @@ static char	*deal_with_root(t_lst *node, char *arg)
 		return (tmp);
 	}
 	else
-	{	
+	{
 		ft_putstr_fd("Unknown user: ", 2);
 		ft_putstr_fd(&arg[1], 2);
 		ft_putendl_fd(".", 2);
 	}
-	return (NULL);	
+	return (NULL);
 }
 
-static void	deal_with_cd_arg(char *arg)
+static void		deal_with_cd_arg(char *arg)
 {
 	DIR			*dir;
 	struct stat	st;
-	
+
 	dir = opendir(arg);
 	if (stat(arg, &st) == -1)
 	{
@@ -81,9 +81,9 @@ static void	deal_with_cd_arg(char *arg)
 		closedir(dir);
 }
 
-int			do_cd(t_lst *node, char *line)
+int				do_cd(t_lst *node, char *line)
 {
-	char 		**arg;
+	char		**arg;
 	int			i;
 
 	arg = ft_strsplit(line, ' ');

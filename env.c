@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 14:55:13 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/31 18:44:17 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/31 19:17:34 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		print_env(t_lst *node)
 		if (!node->line)
 			node = node->next;
 		else
-		{	
+		{
 			ft_putendl(node->line);
 			node = node->next;
 		}
@@ -101,7 +101,7 @@ void		restore_env(t_lst *node, char **save)
 
 int			deal_with_env(t_lst *node, char *line)
 {
-	char 	**save;
+	char	**save;
 	char	**arg;
 
 	arg = ft_strsplit(line, ' ');

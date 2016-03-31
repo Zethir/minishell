@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/30 16:28:16 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/31 18:23:42 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/31 19:30:25 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char	**split_path(t_lst *node)
 {
-	t_lst 			*tmp;
+	t_lst			*tmp;
 	char			**path;
 
 	tmp = node;
@@ -61,7 +61,7 @@ void		check_command(t_lst *node, char **arg, char *right_path, char **env)
 {
 	pid_t			pid;
 	char			*str;
-	
+
 	if (access(ft_strjoin(right_path, *arg), X_OK) != -1)
 	{
 		pid = fork();
@@ -69,37 +69,31 @@ void		check_command(t_lst *node, char **arg, char *right_path, char **env)
 			wait(0);
 		else if (pid == 0)
 		{
-			signal (SIGINT, SIG_DFL);
+			signal(SIGINT, SIG_DFL);
 			str = ft_strjoin(right_path, *arg);
 			if (execve(str, arg, env) == -1)
 				no_command_error(*arg);
 			exit(0);
 		}
-	}			
-	else			
+	}
+	else
 		print_right_error(node, *arg);
 }
 
 static char	**get_env(t_lst *node)
 {
 	t_lst	*tmp;
-	char 	**env;
+	char	**env;
 	int		i;
 
 	tmp = node;
-	i = 0;
-	while (node)
-	{
-		i++;
-		node = node->next;
-	}
-	node = tmp;
+	i = get_index(node);
 	env = (char **)malloc(sizeof(char *) * i + 1);
 	i = 0;
 	while (node)
 	{
 		if (node->line)
-		{	
+		{
 			env[i] = ft_strdup(node->line);
 			i++;
 			node = node->next;
@@ -124,7 +118,7 @@ int			deal_with_command(t_lst *node, char **arg)
 	{
 		right_path = check_path(path, *arg);
 		if (right_path)
-		{	
+		{
 			right_path = ft_strjoin(right_path, "/");
 			check_command(node, arg, right_path, env);
 			return (-1);
