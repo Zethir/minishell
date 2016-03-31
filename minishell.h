@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 14:41:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/31 19:32:52 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/31 22:33:51 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,10 @@ void				no_command_error(char *arg);
 void				deal_with_prompt_path(int i, char *buff);
 void				color(char *color, char *str);
 void				print_right_error(t_lst *node, char *arg);
+void				free_list(t_lst *node);
 void				check_command(t_lst *node, char **arg,
 									char *right_path, char **env);
+void				exec_right_path(t_lst *node, char **arg,
+									char **env, char *right_path);
 
 #endif

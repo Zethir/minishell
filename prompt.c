@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 17:48:35 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/31 19:19:05 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/31 21:25:52 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ static void	prompt_path(t_lst *node)
 		if (ft_strcmp(node->name, "PWD") == 0)
 		{
 			getcwd(buff, 100);
-			node->line = ft_strjoin("PWD=", buff);
 			node = tmp;
 			i = cmp_pwd_home(node, buff);
 			deal_with_prompt_path(i, buff);

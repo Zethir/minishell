@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/27 19:39:25 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/31 19:20:28 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/31 21:13:11 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,6 @@ int			do_setenv(t_lst *node, char *line)
 		return (-1);
 	else
 		handle_arg_setenv(node, arg);
+	ft_strdel(arg);
 	return (-1);
 }

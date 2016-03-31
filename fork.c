@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/30 16:28:16 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/31 19:30:25 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/31 22:33:45 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void		check_command(t_lst *node, char **arg, char *right_path, char **env)
 			str = ft_strjoin(right_path, *arg);
 			if (execve(str, arg, env) == -1)
 				no_command_error(*arg);
-			exit(0);
+			free(str);
 		}
 	}
 	else
@@ -112,22 +112,25 @@ int			deal_with_command(t_lst *node, char **arg)
 	char			*right_path;
 	char			**env;
 
-	path = split_path(node);
 	env = get_env(node);
+	path = (char **)malloc(sizeof(char *) * 7);
+	if (!path)
+		return (-1);
+	path = split_path(node);
 	if (path && *arg && env)
 	{
 		right_path = check_path(path, *arg);
 		if (right_path)
 		{
-			right_path = ft_strjoin(right_path, "/");
-			check_command(node, arg, right_path, env);
+			exec_right_path(node, arg, env, right_path);
 			return (-1);
 		}
 	}
-	if (*arg && *env)
+	if (*arg && env)
 	{
 		right_path = "";
 		check_command(node, arg, right_path, env);
+		ft_strdel(arg);
 	}
 	return (-1);
 }

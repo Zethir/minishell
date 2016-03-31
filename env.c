@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 14:55:13 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/31 19:17:34 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/31 19:59:35 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ int			deal_with_env(t_lst *node, char *line)
 		if (!save || !(*save))
 			return (-1);
 		restore_env(node, save);
+		ft_strdel(save);
 	}
 	else
 		print_env(node);

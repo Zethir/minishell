@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/28 16:11:24 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/31 19:16:33 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/31 19:59:06 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ int			do_exit(char *line)
 		else
 			return (-1);
 	}
+	ft_strdel(arg);
 	return (i);
 }

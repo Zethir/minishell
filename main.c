@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 14:38:13 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/31 19:21:47 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/31 20:30:28 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ static int	do_arg(t_lst *node, char *arg)
 		i = do_cd(node, arg);
 	else if (*cmd)
 		i = deal_with_command(node, cmd);
+	ft_strdel(cmd);
 	return (i);
 }
 
@@ -93,7 +94,8 @@ static int	main_minishell(t_lst *node)
 			if (do_arg(node, *arg) >= 0)
 			{
 				ft_putstr("exit\n");
-				exit(0);
+				ft_strdel(arg);
+				return (i);
 			}
 			arg++;
 		}
@@ -114,5 +116,7 @@ int			main(int ac, char **av, char **env)
 		i = main_minishell(node);
 	else
 		return (1);
+	if (node)
+		free_list(node);
 	return (i);
 }

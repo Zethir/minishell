@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 15:17:58 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/31 19:29:24 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/03/31 22:34:24 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,11 @@ int		get_index(t_lst *node)
 	}
 	node = tmp;
 	return (i);
+}
+
+void	exec_right_path(t_lst *node, char **arg, char **env, char *right_path)
+{
+	right_path = ft_strjoin(right_path, "/");
+	check_command(node, arg, right_path, env);
+	ft_strdel(env);
 }
