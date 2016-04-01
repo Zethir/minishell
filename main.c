@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 14:38:13 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/31 20:30:28 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/04/01 19:03:52 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int	do_arg(t_lst *node, char *arg)
 	char	**cmd;
 
 	i = 0;
-	cmd = ft_strsplit(arg, ' ');
+	cmd = ft_strsplit_ws(arg);
 	if (ft_strncmp(*cmd, "exit", 4) == 0)
 		i = do_exit(arg);
 	else if (ft_strncmp(*cmd, "env", 3) == 0)
@@ -75,16 +75,16 @@ static int	do_arg(t_lst *node, char *arg)
 	return (i);
 }
 
-static int	main_minishell(t_lst *node)
+static int	main_minishell(t_lst *node, char **env)
 {
 	char	*line;
 	char	**arg;
-	int		i;
 
 	line = NULL;
-	i = 0;
 	while (1)
 	{
+		if (check_lst(node) == 0)
+			node = init_lst(env);
 		get_prompt(node);
 		if (get_next_line(0, &line) != 1)
 			break ;
@@ -95,28 +95,26 @@ static int	main_minishell(t_lst *node)
 			{
 				ft_putstr("exit\n");
 				ft_strdel(arg);
-				return (i);
+				return (0);
 			}
 			arg++;
 		}
 	}
-	return (i);
+	return (0);
 }
 
 int			main(int ac, char **av, char **env)
 {
 	t_lst	*node;
-	int		i;
 
 	av = NULL;
 	node = init_lst(env);
 	signal(SIGINT, SIG_IGN);
-	i = 0;
 	if (ac == 1)
-		i = main_minishell(node);
+		main_minishell(node, env);
 	else
 		return (1);
 	if (node)
 		free_list(node);
-	return (i);
+	return (0);
 }

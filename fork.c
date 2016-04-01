@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/30 16:28:16 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/31 22:33:45 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/04/01 17:20:18 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void		check_command(t_lst *node, char **arg, char *right_path, char **env)
 			if (execve(str, arg, env) == -1)
 				no_command_error(*arg);
 			free(str);
+			exit(0);
 		}
 	}
 	else

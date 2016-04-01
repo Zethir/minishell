@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 14:55:13 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/31 19:59:35 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/04/01 19:48:24 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void		print_env(t_lst *node)
 static char	*cmp_line(t_lst *node, char **arg, char *save)
 {
 	t_lst	*tmp;
-	char	*str;
 
 	tmp = node;
 	while (node)
@@ -42,17 +41,16 @@ static char	*cmp_line(t_lst *node, char **arg, char *save)
 		{
 			save = ft_strdup(node->line);
 			node->line = ft_strdup(*arg);
-			str = ft_strdup(node->line);
 		}
 		node = node->next;
 	}
 	node = tmp;
-	if (!str)
-		str = "!@#$é";
-	if (ft_strcmp(str, *arg) != 0)
+	if (!save)
 	{
-		print_error_opt(*arg);
-		return (NULL);
+		if (check_caract(*arg, '=') == 1)
+			add_elem(node, *arg);
+		else
+			print_error_opt(*arg);
 	}
 	return (save);
 }
@@ -61,23 +59,28 @@ static char	**deal_with_arg(t_lst *node, char **arg)
 {
 	char	**save;
 	int		i;
+	int		j;
 
 	i = 0;
+	j = 0;
 	while (arg[i])
 		i++;
-	save = (char **)malloc(sizeof(char *) * i + 1);
-	if (!save)
-		return (NULL);
+	save = malloc_tab(i);
 	i = 0;
 	while (*arg)
 	{
 		save[i] = cmp_line(node, arg, save[i]);
 		if (!save[i])
-			return (NULL);
+			j++;
 		i++;
 		arg++;
 	}
 	print_env(node);
+	while (j > 0)
+	{
+		node = delete_elem(node);
+		j--;
+	}
 	return (save);
 }
 
@@ -112,10 +115,10 @@ int			deal_with_env(t_lst *node, char *line)
 			save = deal_with_opt(node, arg);
 		else
 			save = deal_with_arg(node, arg);
-		if (!save || !(*save))
+		if (!save || !*save)
 			return (-1);
 		restore_env(node, save);
-		ft_strdel(save);
+		free(save);
 	}
 	else
 		print_env(node);

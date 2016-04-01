@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 14:41:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/03/31 22:33:51 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/04/01 19:42:59 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ typedef struct		s_lst
 }					t_lst;
 
 t_lst				*init_lst(char **env);
+t_lst				*delete_elem(t_lst *node);
 char				**deal_with_opt(t_lst *node, char **arg);
+char				**malloc_tab(int i);
 int					deal_with_env(t_lst *node, char *line);
 int					ft_strccmp(const char *s1, const char *s2, char c);
 int					do_setenv(t_lst *node, char *line);
@@ -52,6 +54,8 @@ int					do_cd(t_lst *node, char *line);
 int					ft_strlen_char(char *str, char c);
 int					deal_with_command(t_lst *node, char **arg);
 int					get_index(t_lst *node);
+int					check_lst(t_lst *node);
+int					check_caract(char *str, char c);
 void				push_node(t_lst *node, t_lst **head);
 void				get_prompt(t_lst *node);
 void				print_env(t_lst *node);
@@ -64,6 +68,7 @@ void				deal_with_prompt_path(int i, char *buff);
 void				color(char *color, char *str);
 void				print_right_error(t_lst *node, char *arg);
 void				free_list(t_lst *node);
+void				add_elem(t_lst *node, char *arg);
 void				check_command(t_lst *node, char **arg,
 									char *right_path, char **env);
 void				exec_right_path(t_lst *node, char **arg,
