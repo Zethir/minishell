@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 14:38:13 by cboussau          #+#    #+#             */
-/*   Updated: 2016/04/01 19:03:52 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/04/04 20:56:00 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,17 @@ static int	do_arg(t_lst *node, char *arg)
 
 	i = 0;
 	cmd = ft_strsplit_ws(arg);
-	if (ft_strncmp(*cmd, "exit", 4) == 0)
+	if (!*cmd)
+		return (-1);
+	if (ft_strcmp(*cmd, "exit") == 0)
 		i = do_exit(arg);
-	else if (ft_strncmp(*cmd, "env", 3) == 0)
+	else if (ft_strcmp(*cmd, "env") == 0)
 		i = deal_with_env(node, arg);
-	else if (ft_strncmp(*cmd, "setenv", 6) == 0)
+	else if (ft_strcmp(*cmd, "setenv") == 0)
 		i = do_setenv(node, arg);
-	else if (ft_strncmp(*cmd, "unsetenv", 8) == 0)
+	else if (ft_strcmp(*cmd, "unsetenv") == 0)
 		i = do_unsetenv(node, arg);
-	else if (ft_strncmp(*cmd, "cd", 2) == 0)
+	else if (ft_strcmp(*cmd, "cd") == 0)
 		i = do_cd(node, arg);
 	else if (*cmd)
 		i = deal_with_command(node, cmd);
@@ -97,6 +99,7 @@ static int	main_minishell(t_lst *node, char **env)
 				ft_strdel(arg);
 				return (0);
 			}
+			ft_putchar('\n');
 			arg++;
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 14:55:13 by cboussau          #+#    #+#             */
-/*   Updated: 2016/04/01 19:48:24 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/04/04 21:01:00 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,18 @@ static char	*cmp_line(t_lst *node, char **arg, char *save)
 		{
 			save = ft_strdup(node->line);
 			node->line = ft_strdup(*arg);
+			return (save);
 		}
 		node = node->next;
 	}
 	node = tmp;
+	save = NULL;
 	if (!save)
 	{
 		if (check_caract(*arg, '=') == 1)
 			add_elem(node, *arg);
+		else if (check_caract(*arg, '=') != 1)
+			deal_with_command(node, arg);
 		else
 			print_error_opt(*arg);
 	}
@@ -70,17 +74,15 @@ static char	**deal_with_arg(t_lst *node, char **arg)
 	while (*arg)
 	{
 		save[i] = cmp_line(node, arg, save[i]);
-		if (!save[i])
+		if (!save[i] && *arg && check_caract(*arg, '=') == 1)
 			j++;
 		i++;
 		arg++;
 	}
-	print_env(node);
-	while (j > 0)
-	{
+	if (j > 0)
+		print_env(node);
+	while (j-- > 0)
 		node = delete_elem(node);
-		j--;
-	}
 	return (save);
 }
 
